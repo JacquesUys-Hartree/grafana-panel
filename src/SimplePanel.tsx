@@ -6,12 +6,12 @@ import { stylesFactory, useTheme, AsyncMultiSelect } from '@grafana/ui';
 
 interface Props extends PanelProps<SimpleOptions> {}
 
-const options: SelectableValue = [
-  { label: 'Basic option', value: 0 },
-  { label: 'Option with description', value: 1, description: 'this is a description' },
+const asyncoptions: SelectableValue<string>[] = [
+  { label: 'Basic option', value: '0' },
+  { label: 'Option with description', value: '1', description: 'this is a description' },
   {
     label: 'Option with description and image',
-    value: 2,
+    value: '2',
     description: 'This is a very elaborate description, describing all the wonders in the world.',
     imgUrl: 'https://placekitten.com/40/40',
   },]
@@ -23,7 +23,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
   const loadAsyncOptions = () => {
     return new Promise<Array<SelectableValue<string>>>((resolve) => {
       setTimeout(() => {
-        resolve(options);
+        resolve(asyncoptions);
       }, 2000);
     });
   };
