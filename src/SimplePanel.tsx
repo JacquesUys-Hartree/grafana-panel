@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PanelProps, SelectableValue } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import { css, cx } from 'emotion';
-import { stylesFactory, useTheme, AsyncMultiSelect } from '@grafana/ui';
+import { stylesFactory, useTheme, AsyncMultiSelect, Button, Field, Input, Switch  } from '@grafana/ui';
 
 interface Props extends PanelProps<SimpleOptions> {}
 
@@ -20,6 +20,8 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
   const theme = useTheme();
   const styles = getStyles();
 
+  // const [switchValue, setSwitchValue]= useState(false);
+
   const loadAsyncOptions = () => {
     return new Promise<Array<SelectableValue<string>>>((resolve) => {
       setTimeout(() => {
@@ -27,6 +29,8 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
       }, 2000);
     });
   };
+
+  const setSwitchValue = (ev: boolean) => !ev;
 
   return (
     <div
@@ -38,6 +42,12 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
         `
       )}
     >
+
+      <Button size="md">Test</Button>
+      <Switch value={false} onChange={(v) => setSwitchValue(v)} css={''} />
+      <Field label={'Label'} description={'Desc'}>
+        <Input id="userName" css={''} />
+      </Field>
       <AsyncMultiSelect
         onChange={() => {}}
         loadOptions={loadAsyncOptions}
